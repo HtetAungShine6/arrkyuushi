@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_2.*
 
-class Fragment2 : Fragment(), AdapterListener {
+class Fragment2() : Fragment(), AdapterListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +33,7 @@ class Fragment2 : Fragment(), AdapterListener {
             }
         }
     }
+
 
     override fun passData(text: String) {
         val model = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)

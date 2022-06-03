@@ -6,11 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_holder_todo_list_item.view.*
 
-class ResultTextAdapter(
-    resultText: MutableList<String>, private val listener: AdapterListener
-) : RecyclerView.Adapter<TodoListItemViewHolder>() {
-
-    private var data = resultText
+class ResultTextAdapter
+    (private val resultText: MutableList<String>, private val listener: AdapterListener) : RecyclerView.Adapter<TodoListItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoListItemViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -19,22 +16,22 @@ class ResultTextAdapter(
     }
 
     override fun onBindViewHolder(holder: TodoListItemViewHolder, position: Int) {
-        val item = data[position]
+        val item = resultText[position]
         holder.itemView.tvResult.text = item
         holder.itemView.btnDelete.setOnClickListener {
-
-            data.remove(item)
+            listener.passData(item)
+            resultText.remove(item)
             notifyItemRemoved(position)
         }
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return resultText.size
     }
 }
 
-class TodoListItemViewHolder(itemView: View, listener: AdapterListener) :
-    RecyclerView.ViewHolder(itemView) {
+class TodoListItemViewHolder(itemView: View, private val listener: AdapterListener) :
+    RecyclerView.ViewHolder(itemView.rootView) {
 
 }
 

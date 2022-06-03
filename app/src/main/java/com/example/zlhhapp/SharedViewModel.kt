@@ -1,27 +1,38 @@
 package com.example.zlhhapp
 
+import androidx.compose.ui.platform.textInputServiceFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.android.synthetic.main.fragment_2.*
 
 class SharedViewModel : ViewModel() {
 
-    private val _message = MutableLiveData<List<String>>()
-
+    val _message  = MutableLiveData<List<String>>()
     val messages: LiveData<List<String>> = _message
 
     var newList = _message.value.orEmpty().toMutableList()
 
-    fun sendMessage(text: String) {
+    fun sendMessage(text : String) {
         newList.add(text)
         _message.value = newList
     }
 
     fun removeMessage(text: String) {
-        val newList = _message.value.orEmpty().toMutableList()
         newList.remove(text)
-        _message.value = newList
     }
 
 }
+
+private fun <T> MutableLiveData<T>.removeObserver() {
+
+}
+
+
+
+
+
+
+
 
